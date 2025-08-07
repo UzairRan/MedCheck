@@ -9,7 +9,7 @@ def generate_pdf(data, output_path="medcheck_report.pdf"):
     html_out = template.render(**data)
 
     # Point to wkhtmltopdf executable
-    config = pdfkit.configuration(wkhtmltopdf='/app/bin/wkhtmltopdf') 
+    config = pdfkit.configuration(wkhtmltopdf='/usr/local/bin/wkhtmltopdf') 
 
     # Generate PDF
     pdfkit.from_string(html_out, output_path, configuration=config)
