@@ -1,0 +1,126 @@
+<!-- templates/result.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Results - MedCheck</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #d32f2f;
+            margin-top: 0;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            background: #1976d2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0d47a1;
+        }
+        .risk {
+            padding: 10px;
+            margin: 20px 0;
+            font-size: 1.2em;
+            border-radius: 4px;
+        }
+        .high {
+            background: #ffcdd2;
+            color: #c62828;
+        }
+        .medium {
+            background: #ffe0b2;
+            color: #bf360c;
+        }
+        .low {
+            background: #c8e6c9;
+            color: #1b5e20;
+        }
+        .interaction {
+            background: white;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid #eee;
+        }
+        .disclaimer {
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 30px;
+            padding-top: 10px;
+            border-top: 1px solid #ddd;
+        }
+        .error {
+            color: red;
+        }
+        .info {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💊 MedCheck Report</h1>
+
+        <div class="risk {{ 'high' if risk_level == 'High' else 'medium' if risk_level == 'Medium' else 'low' }}">
+            Risk Level: <strong>{{ risk_level }}</strong>
+        </div>
+
+        {% if interactions %}
+    {% if risk_level == 'High' %}
+        <h2>⚠️ Dangerous Combinations Found</h2>
+    {% endif %}
+
+    {% for intr in interactions %}
+        <div class="interaction">
+            <p><strong>{{ intr.pair }}</strong></p>
+            <p><strong>Description:</strong> {{ intr.description }}</p>
+            <p><strong>Onset:</strong> {{ intr.onset }}</p>
+            <p><strong>Advice:</strong> {{ intr.advice }}</p>
+            {% if intr.food_precautions and intr.food_precautions != 'N/A' %}
+                <p><strong>Diet Warning:</strong> {{ intr.food_precautions }}</p>
+            {% endif %}
+        </div>
+    {% endfor %}
+{% else %}
+    <p class="info">✅ No serious interactions found.</p>
+{% endif %} 
+
+        <p><strong>Entered:</strong> {{ ', '.join(drugs_entered) }}</p>
+
+        <form action="/generate-pdf" method="POST">
+            <button type="submit">📥 Download PDF Report</button>
+        </form>
+
+        <div class="disclaimer">
+            <p><strong>Disclaimer:</strong> MedCheck provides educational information only. Always consult your healthcare provider before making changes.</p>
+        </div>
+    </div>
+</body>
+</html> 
