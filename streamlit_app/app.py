@@ -2,7 +2,6 @@
 import streamlit as st
 import sqlite3
 from datetime import datetime
-from pdf_generator import generate_pdf
 
 # App config
 st.set_page_config(page_title="💊 MedCheck", layout="centered")
@@ -24,6 +23,18 @@ st.markdown("""
         .disclaimer { font-size: 0.9em; color: #555; margin-top: 30px; }
         .error { color: red; }
         .info { color: green; }
+
+        /* Print-specific styles */
+        @media print {
+            body { font-size: 12pt; }
+            .stApp { padding: 0; }
+            .block-container { padding: 1rem; }
+            .stButton, .stTextInput, .stSidebar, .stFooter { display: none !important; }
+            .disclaimer { font-size: 10pt; color: #333; }
+            .container { box-shadow: none; }
+            .interaction { page-break-inside: avoid; }
+            h1, h2, h3 { page-break-after: avoid; }
+        }
     </style>
 """, unsafe_allow_html=True)
 
@@ -107,31 +118,35 @@ if st.button("Check Interactions"):
                     if intr['food_precautions'] and intr['food_precautions'] != 'N/A':
                         st.write(f"**Diet Warning**: {intr['food_precautions']}")
 
-            # Save result in session state
+            # Save result for printing
             result = {
                 "risk_level": risk_level,
                 "interactions": interactions,
                 "drugs_entered": [d.title() for d in drugs],
                 "timestamp": datetime.now().strftime("%B %d, %Y")
             }
-            st.session_state.result = result  # Save for later
+            st.session_state.result = result
 
-            # Generate PDF Button
-            if st.button("Generate PDF Report"):
-                try:
-                    pdf_data = generate_pdf(st.session_state.result)
-                    st.session_state.pdf_data = pdf_data
-                except Exception as e:
-                    st.error(f"PDF generation failed: {str(e)}")
-
-            # Always show download button if PDF is ready
-            if 'pdf_data' in st.session_state:
-                st.download_button(
-                    "📥 Download PDF",
-                    data=st.session_state.pdf_data,
-                    file_name="MedCheck_Report.pdf",
-                    mime="application/pdf"
-                )
+            # --- Print Button (No PDF needed) ---
+            st.markdown("""
+                <script>
+                function printReport() {
+                    window.print();
+                }
+                </script>
+                <button onclick="printReport()" style="
+                    padding: 10px 20px;
+                    background: #2e7d32;
+                    color: white;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    font-size: 16px;
+                    margin-top: 20px;
+                ">
+                    🖨️ Print This Report
+                </button>
+            """, unsafe_allow_html=True)
         else:
             st.info("✅ No serious interactions found.")
 
