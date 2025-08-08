@@ -83,10 +83,15 @@ drugcheck/
 ├───streamlit_app/
 
 │   ├── app.py
+
 │   ├── create_db.py
+
 │   ├── pdf_generator.py
+
 │   ├── templates/
+
 │   │   ├── index.html
+
 │   │   └── result.html
 
 
@@ -94,13 +99,21 @@ drugcheck/
 # 🔄 Development Flow
 
 🔍 Problem Identification  
+
    ↳ Feasibility Check  
+   
        ↳ Tool Selection  
+       
            ↳ Code & Build  
+           
                ↳ Validate Results  
-                   ↳ Deploy Solution  
-                       ↳ Communicate Clearly  
+               
+                   ↳ Deploy Solution 
+                   
+                       ↳ Communicate Clearly 
+                       
                            ↳ Plan Enhancements  
+                           
                                ↳ AI/ML Integration
 
 
