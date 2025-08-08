@@ -4,11 +4,14 @@ A simple, reliable tool to check dangerous drug interactions  built with Flask, 
 
 No more "No interaction found" for real dangers like sertraline + tramadol. 
 
-**Many APIs miss critical drug interactions**
+
+# Many APIs miss critical drug interactions
 
 MedCheck fixes that by using a curated, manually verified database of high-risk combinations cross-checked from  medical sources.
 
-**Why Understanding and Working on This Problem**
+
+
+# Why Understanding and Working on This Problem
 
 Patients take multiple medications, OTCs, and supplements, often without knowing the dangers.
 
@@ -16,7 +19,9 @@ After searching various tools, the Current tools are complex, doctor and pharmac
 
 No simple, patient-friendly way to check  their meds together for real risks.
 
-**What Was Happening?**
+
+
+# What Was Happening?
 
 Patients didn’t know their drug combos could be dangerous. They used apps that only remind them to take pills, not warn them of harm.
 
@@ -25,13 +30,17 @@ Try It Live
 Streamlit App: https://medcheck-cqecu2dumgnvkhmjbxzwhp.streamlit.app/ 
 
 
-**✅ Features**
+
+
+# ✅ Features
 
 → Check interactions between prescriptions, OTCs, and supplements
 
 → Clear risk levels: High / Medium / Low
 
 → Real warnings with onset time, advice, and diet precautions
+
+
 
 # 🧱 Tech Stack
 
@@ -69,7 +78,9 @@ drugcheck/
 │   │   ├── index.html
 │   │   └── result.html
 
-🔄 Development Flow
+
+
+# 🔄 Development Flow
 
 🔍 Problem Identification  
    ↳ Feasibility Check  
@@ -83,7 +94,8 @@ drugcheck/
 
 
 
-**What Data Do Patients Enter?** 
+
+# What Data Do Patients Enter?
 
 ✅ Prescription drugs (e.g., sertraline, tramadol)
 
@@ -91,10 +103,11 @@ drugcheck/
 
 ✅ Supplements (e.g., fish oil, St. John’s Wort, melatonin)
 
-✅ One per line  no complex forms
+✅ One per line,  no complex forms
 
 
-**What Results Do They Get?**
+
+# What Results Do They Get?
 
 ➡️ Risk Level: Low / Medium / High
 
@@ -105,6 +118,8 @@ drugcheck/
 ➡️ Actionable Advice: “Avoid this combo — talk to your doctor.”
 
 ➡️ Diet Warnings: “Avoid alcohol” or “Avoid grapefruit juice”
+
+
 
 # 📚 Data Source
 Interactions are manually curated and cross-verified from:
@@ -121,6 +136,8 @@ RxNorm
 
 Take help from AI Tools as well
 
+
+
 # Future Enhancements for AI and ML 
 
 ✔️ AI-powered prediction of unknown interactions
@@ -129,9 +146,11 @@ Take help from AI Tools as well
 
 ✔️ Email report
 
+
+
 # Vision
 
-MedCheck is built with patient safety in mind — combining verified data, intuitive design, and scalable tech to make drug interaction checking simple, accurate, and accessible
+MedCheck is built with patient safety in mind,  combining verified data, intuitive design, and scalable tech to make drug interaction checking simple, accurate, and accessible
 
 
 
