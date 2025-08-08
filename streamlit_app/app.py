@@ -107,17 +107,20 @@ if st.button("Check Interactions"):
                     if intr['food_precautions'] and intr['food_precautions'] != 'N/A':
                         st.write(f"**Diet Warning**: {intr['food_precautions']}")
 
-            # Generate PDF (only trigger generation on button click)
+            # Save result in session state
             result = {
                 "risk_level": risk_level,
                 "interactions": interactions,
                 "drugs_entered": [d.title() for d in drugs],
                 "timestamp": datetime.now().strftime("%B %d, %Y")
             }
+            st.session_state.result = result  # Save for later
 
+            # Generate PDF Button
             if st.button("Generate PDF Report"):
                 try:
-                    st.session_state.pdf_data = generate_pdf(result)
+                    pdf_data = generate_pdf(st.session_state.result)
+                    st.session_state.pdf_data = pdf_data
                 except Exception as e:
                     st.error(f"PDF generation failed: {str(e)}")
 
@@ -134,4 +137,4 @@ if st.button("Check Interactions"):
 
 # Footer
 st.markdown("---")
-st.write("Disclaimer: MedCheck provides educational information only. Always consult your healthcare provider before making changes.") 
+st.write("Disclaimer: MedCheck provides educational information only. Always consult your healthcare provider before making changes.")
