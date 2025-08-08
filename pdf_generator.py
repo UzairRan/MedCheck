@@ -13,7 +13,7 @@ def generate_pdf(data, output_path="medcheck_report.pdf"):
 
     # Configure pdfkit (Windows path)
     
-    config = pdfkit.configuration(wkhtmltopdf='/usr/local/bin/wkhtmltopdf')  # for render 
+    config = pdfkit.configuration(wkhtmltopdf=r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe') 
 
     # Generate PDF
     pdfkit.from_string(html_out, output_path, configuration=config)
