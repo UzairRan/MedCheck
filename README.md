@@ -61,16 +61,27 @@ Programming: Python, HTML
 # 📁 Project Structure
 
 drugcheck/
+
 │   app.py
+
 │   create_db.py
+
 │   pdf_generator.py
+
 │   requirements.txt
+
 │
+
 ├───data/
+
 │   └── drug_interactions.csv
+
 ├───database/
+
 │   └── interactions.db
+
 ├───streamlit_app/
+
 │   ├── app.py
 │   ├── create_db.py
 │   ├── pdf_generator.py
