@@ -6,7 +6,7 @@ from datetime import datetime
 # App config
 st.set_page_config(page_title="💊 MedCheck", layout="centered")
 
-# CSS (same as your Flask app)
+# CSS
 st.markdown("""
     <style>
         body { font-family: Arial, sans-serif; background: #f5f5f5; }
@@ -23,18 +23,6 @@ st.markdown("""
         .disclaimer { font-size: 0.9em; color: #555; margin-top: 30px; }
         .error { color: red; }
         .info { color: green; }
-
-        /* Print-specific styles */
-        @media print {
-            body { font-size: 12pt; }
-            .stApp { padding: 0; }
-            .block-container { padding: 1rem; }
-            .stButton, .stTextInput, .stSidebar, .stFooter { display: none !important; }
-            .disclaimer { font-size: 10pt; color: #333; }
-            .container { box-shadow: none; }
-            .interaction { page-break-inside: avoid; }
-            h1, h2, h3 { page-break-after: avoid; }
-        }
     </style>
 """, unsafe_allow_html=True)
 
@@ -117,39 +105,9 @@ if st.button("Check Interactions"):
                     st.write(f"**Advice**: {intr['advice']}")
                     if intr['food_precautions'] and intr['food_precautions'] != 'N/A':
                         st.write(f"**Diet Warning**: {intr['food_precautions']}")
-
-            # Save result for printing
-            result = {
-                "risk_level": risk_level,
-                "interactions": interactions,
-                "drugs_entered": [d.title() for d in drugs],
-                "timestamp": datetime.now().strftime("%B %d, %Y")
-            }
-            st.session_state.result = result
-
-            # --- Print Button (No PDF needed) ---
-            st.markdown("""
-                <script>
-                function printReport() {
-                    window.print();
-                }
-                </script>
-                <button onclick="printReport()" style="
-                    padding: 10px 20px;
-                    background: #2e7d32;
-                    color: white;
-                    border: none;
-                    border-radius: 4px;
-                    cursor: pointer;
-                    font-size: 16px;
-                    margin-top: 20px;
-                ">
-                    🖨️ Print This Report
-                </button>
-            """, unsafe_allow_html=True)
         else:
             st.info("✅ No serious interactions found.")
 
 # Footer
 st.markdown("---")
-st.write("Disclaimer: MedCheck provides educational information only. Always consult your healthcare provider before making changes.")
+st.write("Disclaimer: MedCheck provides educational and convenience-based information to support patient awareness. Always consult your healthcare provider.") 
